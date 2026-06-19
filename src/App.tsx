@@ -35,6 +35,10 @@ const companyAlignment: Record<
       recommendedTestId: "software-array-window",
       emphasis: "Correctness, implementation clarity, and maintainable reasoning.",
     },
+    OpenAI: {
+      recommendedTestId: "software-openai-agent-runtime",
+      emphasis: "AI product engineering, tool orchestration, safety checks, and resilient runtime design.",
+    },
   },
   data: {
     Airbnb: {
@@ -53,6 +57,10 @@ const companyAlignment: Record<
       recommendedTestId: "data-sql-retention",
       emphasis: "Strong SQL thinking, retention logic, and business storytelling.",
     },
+    OpenAI: {
+      recommendedTestId: "data-openai-eval-quality",
+      emphasis: "Evaluation design, model behavior analysis, and quality measurement under ambiguity.",
+    },
   },
   product: {
     Stripe: {
@@ -64,8 +72,8 @@ const companyAlignment: Record<
       emphasis: "Product sense, workflow clarity, and taste in the first release.",
     },
     OpenAI: {
-      recommendedTestId: "product-market-expansion",
-      emphasis: "Strategic framing, responsible rollout, and cross-functional ambiguity handling.",
+      recommendedTestId: "product-openai-agent-launch",
+      emphasis: "AI product judgment, responsible launch gates, trust calibration, and metrics.",
     },
     Figma: {
       recommendedTestId: "product-improve-checkout",
@@ -88,6 +96,10 @@ const companyAlignment: Record<
     Shopify: {
       recommendedTestId: "design-design-system",
       emphasis: "Systems thinking, platform consistency, and organizational design impact.",
+    },
+    OpenAI: {
+      recommendedTestId: "design-openai-copilot-workflow",
+      emphasis: "AI interaction design, user trust, uncertainty handling, and workflow control.",
     },
   },
   devops: {
@@ -112,6 +124,10 @@ const companyAlignment: Record<
       emphasis:
         "Large-scale data platform reliability across Oracle databases, Kafka pipelines, and Hadoop-backed operational workflows.",
     },
+    OpenAI: {
+      recommendedTestId: "devops-openai-inference-incident",
+      emphasis: "Model-serving reliability, inference capacity, graceful degradation, and launch readiness.",
+    },
     "Cerner / Oracle Health": {
       recommendedTestId: "devops-cerner-clinical-cutover",
       emphasis:
@@ -135,6 +151,10 @@ const companyAlignment: Record<
       recommendedTestId: "security-breach-triage",
       emphasis: "Incident judgment, containment discipline, and risk communication.",
     },
+    OpenAI: {
+      recommendedTestId: "security-openai-prompt-injection",
+      emphasis: "Prompt injection defense, tool abuse prevention, permissions, and audit strategy.",
+    },
   },
   qa: {
     Microsoft: {
@@ -152,6 +172,10 @@ const companyAlignment: Record<
     Adobe: {
       recommendedTestId: "qa-quality-gate-go-no-go",
       emphasis: "Risk framing, stakeholder communication, and hard release decisions.",
+    },
+    OpenAI: {
+      recommendedTestId: "qa-openai-eval-regression",
+      emphasis: "AI evaluation coverage, ambiguous regressions, safety filters, and release confidence.",
     },
     "Cerner / Oracle Health": {
       recommendedTestId: "qa-cerner-clinical-regression",

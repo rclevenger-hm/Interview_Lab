@@ -35,7 +35,7 @@ export const disciplines: Discipline[] = [
     tag: "DSA + systems + communication",
     summary:
       "Build fluency across coding rounds, system design, behavioral storytelling, and leadership principles.",
-    companyFit: ["Google", "Meta", "Amazon", "Microsoft"],
+    companyFit: ["Google", "Meta", "Amazon", "Microsoft", "OpenAI"],
     preparationTracks: [
       "Data structures sprints",
       "System design whiteboards",
@@ -140,6 +140,18 @@ export const disciplines: Discipline[] = [
         confirms:
           "Confirmed by official software interview prep pages that system design, distributed systems, and testing are part of senior loops.",
       },
+      {
+        id: "software-openai-agent-runtime",
+        title: "Agent Runtime Reliability",
+        prompt:
+          "Design the core service for an AI assistant that can call tools, stream responses, enforce safety checks, and recover cleanly when model or tool calls fail.",
+        difficulty: "Expert",
+        signal: "Tests AI product engineering, distributed systems judgment, and reliability tradeoffs.",
+        starter:
+          "Start with the request lifecycle, then explain how you would isolate tool failures, preserve user trust, and observe model, policy, and infrastructure behavior separately.",
+        confirms:
+          "Confirmed by AI infrastructure and product engineering interview patterns that test systems design, safety constraints, and production debugging.",
+      },
     ],
   },
   {
@@ -148,7 +160,7 @@ export const disciplines: Discipline[] = [
     tag: "analytics + experimentation + modeling",
     summary:
       "Practice case framing, metrics design, SQL problem solving, machine learning tradeoffs, and executive communication.",
-    companyFit: ["Airbnb", "Netflix", "Uber", "LinkedIn"],
+    companyFit: ["Airbnb", "Netflix", "Uber", "LinkedIn", "OpenAI"],
     preparationTracks: [
       "SQL and product analytics drills",
       "Experiment interpretation labs",
@@ -252,6 +264,18 @@ export const disciplines: Discipline[] = [
           "Start by separating data drift, concept drift, and pipeline failures, then explain how each would change your response.",
         confirms:
           "Confirmed by official machine learning role guidance that evaluation, productionization, and monitoring matter beyond offline accuracy.",
+      },
+      {
+        id: "data-openai-eval-quality",
+        title: "AI Evaluation Quality Review",
+        prompt:
+          "A new assistant feature is passing offline benchmarks but users report inconsistent answer quality in production. Design the evaluation plan, quality slices, and launch decision framework.",
+        difficulty: "Expert",
+        signal: "Tests eval design, measurement judgment, and responsible product decision-making.",
+        starter:
+          "Start by separating offline benchmark performance from user-visible quality, then define the eval set, failure taxonomy, and release thresholds.",
+        confirms:
+          "Confirmed by AI data science and evaluation interview patterns that emphasize measurement design, model behavior analysis, and decision quality.",
       },
     ],
   },
@@ -366,6 +390,18 @@ export const disciplines: Discipline[] = [
         confirms:
           "Confirmed by product strategy and leadership-style PM interviews that test market judgment and influence.",
       },
+      {
+        id: "product-openai-agent-launch",
+        title: "AI Agent Launch Decision",
+        prompt:
+          "Define the launch plan for an AI agent feature that can take actions on behalf of users, where success depends on usefulness, trust, safety, and clear failure handling.",
+        difficulty: "Expert",
+        signal: "Tests AI product sense, responsible rollout, and cross-functional judgment.",
+        starter:
+          "Start with the target user and job-to-be-done, then define the trust boundaries, launch metrics, risk gates, and what you would intentionally leave out of v1.",
+        confirms:
+          "Confirmed by AI product management interview patterns that test product judgment, safety-aware rollout, metrics, and ambiguity management.",
+      },
     ],
   },
   {
@@ -374,7 +410,7 @@ export const disciplines: Discipline[] = [
     tag: "craft + systems + storytelling",
     summary:
       "Prepare for portfolio presentations, whiteboard challenges, critique sessions, and collaboration-heavy interviews.",
-    companyFit: ["Apple", "Figma", "Dropbox", "Shopify"],
+    companyFit: ["Apple", "Figma", "Dropbox", "Shopify", "OpenAI"],
     preparationTracks: [
       "Portfolio story shaping",
       "Whiteboard challenge walkthroughs",
@@ -479,6 +515,18 @@ export const disciplines: Discipline[] = [
         confirms:
           "Confirmed by senior product design interviews that test systems maturity and cross-functional leadership.",
       },
+      {
+        id: "design-openai-copilot-workflow",
+        title: "AI Copilot Workflow Design",
+        prompt:
+          "Design a workflow for a professional user who needs an AI copilot to inspect work, suggest changes, explain uncertainty, and hand control back without disrupting trust.",
+        difficulty: "Advanced",
+        signal: "Tests AI interaction design, trust calibration, and workflow clarity.",
+        starter:
+          "Start with the user's job-to-be-done and the moments where automation should assist, ask, or stay out of the way.",
+        confirms:
+          "Confirmed by AI product design interview patterns that test interaction judgment, ambiguity handling, and responsible user experience design.",
+      },
     ],
   },
   {
@@ -487,7 +535,7 @@ export const disciplines: Discipline[] = [
     tag: "reliability + oracle stack + incident response",
     summary:
       "Prepare for infrastructure interviews covering reliability engineering, observability, automation strategy, and operational judgment.",
-    companyFit: ["Google", "Datadog", "Cloudflare", "Shopify", "Oracle", "Cerner / Oracle Health"],
+    companyFit: ["Google", "Datadog", "Cloudflare", "Shopify", "Oracle", "OpenAI", "Cerner / Oracle Health"],
     preparationTracks: [
       "Incident response rehearsals",
       "Infrastructure-as-code design drills",
@@ -640,6 +688,18 @@ export const disciplines: Discipline[] = [
         confirms:
           "Confirmed by public healthcare platform, Oracle operations, and SRE interview patterns that emphasize production judgment, integration reliability, and incident command.",
       },
+      {
+        id: "devops-openai-inference-incident",
+        title: "Inference Capacity Incident",
+        prompt:
+          "A model-serving tier is seeing sharp latency spikes, queue growth, and intermittent streaming failures during a product launch. Stabilize the system and explain what you would change before the next launch.",
+        difficulty: "Expert",
+        signal: "Tests AI infrastructure operations, capacity planning, and incident command.",
+        starter:
+          "Start with user-visible impact, request queues, model-serving capacity, and whether the fastest mitigation is traffic shaping, fallback behavior, or infrastructure scaling.",
+        confirms:
+          "Confirmed by AI infrastructure and SRE interview patterns that emphasize model-serving reliability, observability, and graceful degradation.",
+      },
     ],
   },
   {
@@ -648,7 +708,7 @@ export const disciplines: Discipline[] = [
     tag: "threats + controls + secure systems",
     summary:
       "Practice the mix of application security, detection thinking, architecture review, and risk communication expected in top security interviews.",
-    companyFit: ["Cloudflare", "Stripe", "Google", "Palo Alto Networks"],
+    companyFit: ["Cloudflare", "Stripe", "Google", "Palo Alto Networks", "OpenAI"],
     preparationTracks: [
       "Threat modeling sessions",
       "Secure design walkthroughs",
@@ -753,6 +813,18 @@ export const disciplines: Discipline[] = [
         confirms:
           "Confirmed by public security engineering interview reports that senior loops test incident judgment, containment, and communication.",
       },
+      {
+        id: "security-openai-prompt-injection",
+        title: "AI Tool Abuse Threat Model",
+        prompt:
+          "Threat-model an AI assistant that can read private workspace data and call internal tools. Identify prompt injection, data exfiltration, permission, and audit risks, then choose the first controls you would ship.",
+        difficulty: "Expert",
+        signal: "Tests AI security judgment, abuse-case prioritization, and layered control design.",
+        starter:
+          "Start with assets, tool permissions, untrusted inputs, and the boundary between model instructions and enforceable system controls.",
+        confirms:
+          "Confirmed by AI security interview patterns that emphasize prompt injection, tool abuse, data access, and practical mitigations.",
+      },
     ],
   },
   {
@@ -761,7 +833,7 @@ export const disciplines: Discipline[] = [
     tag: "quality + automation + release confidence",
     summary:
       "Train for interviews around test strategy, automation depth, failure analysis, and release-readiness judgment across complex systems.",
-    companyFit: ["Microsoft", "Atlassian", "Shopify", "Adobe", "Cerner / Oracle Health"],
+    companyFit: ["Microsoft", "Atlassian", "Shopify", "Adobe", "OpenAI", "Cerner / Oracle Health"],
     preparationTracks: [
       "Test strategy scenarios",
       "Automation framework design prompts",
@@ -877,6 +949,18 @@ export const disciplines: Discipline[] = [
           "Start with the highest-risk clinical workflows, then explain what must be manually explored, what belongs in automation, and what evidence you would need before recommending release.",
         confirms:
           "Confirmed by public healthcare QA, enterprise test engineering, and release-readiness interview patterns that evaluate workflow risk, automation depth, and communication.",
+      },
+      {
+        id: "qa-openai-eval-regression",
+        title: "AI Evaluation Regression Gate",
+        prompt:
+          "Create a release test strategy for an AI assistant update where model behavior, tool calls, safety filters, latency, and answer quality can all regress without a simple pass/fail signal.",
+        difficulty: "Expert",
+        signal: "Tests AI QA strategy, eval coverage, release risk, and ambiguous failure handling.",
+        starter:
+          "Start by defining the highest-risk user journeys, then explain which checks belong in automated evals, human review, integration testing, and launch monitoring.",
+        confirms:
+          "Confirmed by AI QA and release engineering interview patterns that test eval design, regression risk, and production readiness judgment.",
       },
     ],
   },

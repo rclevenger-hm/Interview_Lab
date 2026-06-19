@@ -20,7 +20,7 @@ It currently supports broad preparation across:
 - Security Engineering
 - QA / Test Engineering
 
-The current experience also includes Oracle-focused DevOps / SRE coverage and Cerner / Oracle Health interview flows for interviewer-friendly practice setups.
+The current experience also includes OpenAI-focused role modules, Oracle-focused DevOps / SRE coverage, and Cerner / Oracle Health interview flows for interviewer-friendly practice setups.
 
 ## Features
 
@@ -32,6 +32,7 @@ The current experience also includes Oracle-focused DevOps / SRE coverage and Ce
 - Copy/paste, cut, and drop protection inside the answer workspace
 - Mobile-aware assistance defaults and responsive layout support
 - Quick start behavior that follows the active user selection instead of forcing a single path
+- OpenAI-aligned modules for software, product, data/evals, design, SRE, security, and QA interview practice
 
 ## Tech Stack
 
@@ -72,6 +73,12 @@ npm run build
 ```bash
 npm run preview
 ```
+
+## GitHub Pages Deployment
+
+This repo is configured for GitHub Pages as a project site at `/Interview_Lab/`.
+
+Deployments run from `.github/workflows/pages.yml` whenever changes are pushed to `main`. The workflow installs dependencies, runs the lightweight data smoke tests, builds the Vite app, and publishes the `dist` folder to GitHub Pages.
 
 ## Project Structure
 

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "test": "node tests/data-smoke.mjs",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
