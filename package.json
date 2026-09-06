@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "test": "node tests/data-smoke.mjs",
+    "test": "node tests/data-smoke.mjs && node tests/catalog-smoke.mjs && node tests/interview-engine.mjs",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
