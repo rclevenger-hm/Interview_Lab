@@ -1,16 +1,8 @@
 # Signal Interview Lab
 
-Signal Interview Lab is a React + Vite interview practice site for people preparing for high-bar hiring loops across multiple disciplines.
+Signal Interview Lab is a React + Vite interview-preparation product for candidates preparing for complete hiring loops, not only algorithm rounds.
 
-The app is designed to help users:
-
-- choose a major discipline first
-- explore company-aligned interview pathways
-- work through graded tests from foundation to expert difficulty
-- run a timed mock interview simulation
-- adjust a help meter from strict interview mode to learning mode
-
-It currently supports broad preparation across:
+It currently supports seven major pathways:
 
 - Software Engineering
 - Data Science
@@ -20,98 +12,99 @@ It currently supports broad preparation across:
 - Security Engineering
 - QA / Test Engineering
 
-The current experience also includes OpenAI-focused role modules, Oracle-focused DevOps / SRE coverage, and Cerner / Oracle Health interview flows for interviewer-friendly practice setups.
+## What the product does now
 
-## Features
+The current experience includes:
 
-- Discipline-first pathway selection so prompts and simulator rounds stay relevant
-- Company alignment that recommends a matching test for each company within a discipline
-- Graded test ladders with Foundation, Core, Advanced, and Expert difficulty
-- Interview simulator with round sequencing, timer, answer workspace, and lightweight scoring
-- Help meter with device-aware defaults
-- Copy/paste, cut, and drop protection inside the answer workspace
-- Mobile-aware assistance defaults and responsive layout support
-- Quick start behavior that follows the active user selection instead of forcing a single path
-- OpenAI-aligned modules for software, product, data/evals, design, SRE, security, and QA interview practice
+- **72 curated interview drills** spanning Foundation, Core, Advanced, and Expert difficulty
+- **Role-first preparation** across all seven disciplines
+- **Company anchor tracks** for companies represented in each role pathway
+- **Search and filtering** by text, difficulty, and mastery status
+- **Mastery tracking** with New, Practiced, and Mastered states
+- **Adaptive next-three queue** that prioritizes company relevance, unseen fundamentals, and weaker attempted material
+- **Focused drill mode** for individual interview problems
+- **Mock interview mode** with stage-specific prompt banks so coding, system design, behavioral, incident, product, design, and other rounds use the correct rubric
+- **Timed answer workspace** with Live, Nudge, Coach, and Learn assistance levels
+- **Rubric-level deterministic scoring** across depth, structure, rubric coverage, and decision quality
+- **Attempt history and practice streaks**
+- **Local-first persistence** with JSON progress export/import
+- **Responsive desktop and mobile UI**
 
-## Tech Stack
+## Why it is different from a coding-only prep site
 
-- React 18
-- TypeScript
-- Vite
-- Plain CSS
+Signal Interview Lab is intended to prepare the whole candidate. Coding interviews matter, but senior hiring loops also evaluate system design, debugging, incidents, reliability, product judgment, experimentation, security reasoning, test strategy, communication, and behavioral evidence. The product therefore treats coding as one interview surface inside a broader readiness model.
 
-## Getting Started
+## Current architecture
+
+```text
+.
+├─ src/
+│  ├─ EnhancedApp.tsx       # Main customer experience and mock interview flows
+│  ├─ catalog.ts            # Combined base + expanded challenge catalog
+│  ├─ data.ts               # Core disciplines, stages, companies, and original drills
+│  ├─ extraChallenges.ts    # Expanded interview question bank
+│  ├─ interviewEngine.ts    # Scoring, mastery, recommendations, streaks, persistence validation
+│  ├─ enhanced.css          # Responsive product UI
+│  └─ main.tsx              # App entry point
+├─ tests/
+│  ├─ data-smoke.mjs        # Original data integrity checks
+│  ├─ catalog-smoke.mjs     # Catalog depth, difficulty, IDs, company mappings, mock coverage
+│  └─ interview-engine.mjs  # Scoring, mastery, recommendations, progress, streak behavior
+└─ .github/workflows/
+   ├─ ci.yml                # Pull-request test + build gate
+   └─ pages.yml             # GitHub Pages deployment
+```
+
+## Getting started
 
 ### Requirements
 
-- Node.js 18+ recommended
+- Node.js 18+ (CI uses Node 20)
 - npm
 
-### Install
+### Install and run
 
 ```bash
 npm install
-```
-
-### Run the development server
-
-```bash
 npm run dev
 ```
 
-Vite will print the local URL, usually `http://localhost:5173`.
+### Test
 
-### Build for production
+```bash
+npm test
+```
+
+The test command validates the original catalog, expanded catalog, company mappings, mock prompt coverage, scoring behavior, mastery behavior, adaptive recommendations, persisted attempt validation, and practice streaks.
+
+### Production build
 
 ```bash
 npm run build
 ```
 
-### Preview the production build locally
+## GitHub Pages
 
-```bash
-npm run preview
-```
+The repository deploys the production `dist` build to the `gh-pages` branch when changes reach `main`. Pull requests run a separate CI workflow first so test and TypeScript/build regressions can be caught before deployment.
 
-## GitHub Pages Deployment
+## Roadmap toward LeetCode-class depth
 
-This repo is configured for GitHub Pages as a project site at `/Interview_Lab/`.
+The current product now has the study-plan, question-bank, progress, filtering, company-alignment, and simulation foundations needed for a serious interview-prep product. It is intentionally broader than an algorithms-only platform, but it does **not** yet claim parity with a mature coding judge.
 
-Deployments run from `.github/workflows/pages.yml` whenever changes are pushed to `main`. The workflow installs dependencies, runs the lightweight data smoke tests, builds the Vite app, and publishes the `dist` folder to GitHub Pages.
+The highest-value next milestones are:
 
-## Project Structure
+1. **Secure multi-language coding judge** — isolated execution workers, hidden/public test cases, CPU/memory/time limits, submission history, and Python/JavaScript/TypeScript/Java/Go/C++ support.
+2. **Code editor and technical editorials** — runnable examples, custom test cases, debugging output, complexity analysis, and reviewed solution explanations.
+3. **150+ deeply tagged drills** — topics, role level, interview stage, company relevance, recency metadata, prerequisites, and calibrated difficulty.
+4. **Account-backed sync** — optional sign-in and cloud progress so candidates can move between devices without manual export/import.
+5. **Stronger evaluation services** — server-side rubric evaluation for open-ended answers, calibrated against reviewed exemplars while retaining deterministic product tests.
+6. **Personal study plans** — target interview date, available weekly time, weak-skill detection, spaced repetition, and readiness forecasts.
 
-```text
-.
-├─ src/
-│  ├─ App.tsx        # Main application logic and UI flow
-│  ├─ data.ts        # Discipline, stage, company, and test definitions
-│  ├─ styles.css     # Visual design and responsive layout
-│  └─ main.tsx       # App entry point
-├─ index.html
-├─ package.json
-└─ vite.config.ts
-```
+## Product principles
 
-## Current Product Direction
-
-The repo is set up as a broad interview preparation product first, not a single-company internal tool. The core UX direction is:
-
-- make discipline selection the first meaningful choice
-- keep the simulator hidden until a path is selected
-- let company selection steer the recommended test
-- support both live interview practice and guided learning
-- make the interface usable on both desktop and mobile
-
-## Notes
-
-- Most interview content currently lives in `src/data.ts`, so adding new companies, tests, or disciplines is primarily a content-model update.
-- Company-specific recommendations are mapped in `src/App.tsx`.
-- The scoring and help systems are intentionally lightweight and aimed at guided practice rather than formal evaluation.
-
-## Scripts
-
-- `npm run dev` - start the local development server
-- `npm run build` - compile TypeScript and create a production build
-- `npm run preview` - serve the production build locally
+- Do not give a candidate a high score merely for writing a long answer.
+- Keep mock prompts aligned with the interview stage that evaluates them.
+- Make coaching progressively removable so users can prove the skill without scaffolding.
+- Treat progress as mastery over repeated attempts rather than a one-time completion checkbox.
+- Keep company-specific content useful without pretending unverifiable prompts are exact confidential interview questions.
+- Add a real sandboxed judge before advertising executable coding assessment.
