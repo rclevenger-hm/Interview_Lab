@@ -230,10 +230,8 @@ export function recommendChallenge<T extends ChallengeLike>(
     const challengeAttempts = attemptsForChallenge(attempts, challenge.id);
     const status = masteryStatus(attempts, challenge.id);
     const best = bestScoreForChallenge(attempts, challenge.id);
-    const lastAttempt = challengeAttempts
-      .map((attempt) => attempt.createdAt)
-      .sort()
-      .at(-1) ?? "";
+    const attemptDates = challengeAttempts.map((attempt) => attempt.createdAt).sort();
+    const lastAttempt = attemptDates.length > 0 ? attemptDates[attemptDates.length - 1] : "";
 
     return {
       challenge,
