@@ -303,14 +303,14 @@ export function sanitizeAttempts(value: unknown): AttemptRecord[] {
     if (!item || typeof item !== "object") return false;
     const candidate = item as Partial<AttemptRecord>;
     return Boolean(
-      typeof candidate.id === "string" &&
-      typeof candidate.challengeId === "string" &&
-      typeof candidate.disciplineId === "string" &&
-      typeof candidate.stageName === "string" &&
-      typeof candidate.score === "number" &&
-      candidate.score >= 0 && candidate.score <= 100 &&
-      typeof candidate.wordCount === "number" &&
-      typeof candidate.helpLevel === "number" &&
+      typeof candidate.id === "string" && candidate.id.trim().length > 0 &&
+      typeof candidate.challengeId === "string" && candidate.challengeId.trim().length > 0 &&
+      typeof candidate.disciplineId === "string" && candidate.disciplineId.trim().length > 0 &&
+      typeof candidate.stageName === "string" && candidate.stageName.trim().length > 0 &&
+      Number.isFinite(candidate.score) &&
+      candidate.score! >= 0 && candidate.score! <= 100 &&
+      Number.isInteger(candidate.wordCount) && candidate.wordCount! >= 0 &&
+      Number.isInteger(candidate.helpLevel) && candidate.helpLevel! >= 0 &&
       typeof candidate.createdAt === "string" &&
       !Number.isNaN(Date.parse(candidate.createdAt))
     );
