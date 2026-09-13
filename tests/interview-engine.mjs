@@ -67,12 +67,14 @@ assert.deepEqual(
 assert.equal(engine.practiceStreak(attempts, new Date("2026-09-05T18:00:00Z")), 3, "practice streak should count consecutive active days");
 assert.equal(engine.sanitizeAttempts([{ nope: true }]).length, 0, "invalid saved attempts should be discarded");
 assert.equal(engine.sanitizeAttempts(attempts).length, attempts.length, "valid attempts should survive sanitization");
+assert.equal(engine.sanitizeAttempts([{ ...attempts[0], helpLevel: 3 }]).length, 1, "maximum supported help level should remain valid");
 
 const corruptAttempts = [
   { ...attempts[0], id: "" },
   { ...attempts[0], wordCount: -1 },
   { ...attempts[0], wordCount: 12.5 },
   { ...attempts[0], helpLevel: -1 },
+  { ...attempts[0], helpLevel: 4 },
   { ...attempts[0], helpLevel: Number.NaN },
 ];
 assert.equal(engine.sanitizeAttempts(corruptAttempts).length, 0, "corrupt saved attempt metrics and empty identifiers should be discarded");
