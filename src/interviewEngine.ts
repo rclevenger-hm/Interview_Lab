@@ -310,7 +310,7 @@ export function sanitizeAttempts(value: unknown): AttemptRecord[] {
       Number.isFinite(candidate.score) &&
       candidate.score! >= 0 && candidate.score! <= 100 &&
       Number.isInteger(candidate.wordCount) && candidate.wordCount! >= 0 &&
-      Number.isInteger(candidate.helpLevel) && candidate.helpLevel! >= 0 &&
+      Number.isInteger(candidate.helpLevel) && candidate.helpLevel! >= 0 && candidate.helpLevel! <= 3 &&
       typeof candidate.createdAt === "string" &&
       !Number.isNaN(Date.parse(candidate.createdAt))
     );
