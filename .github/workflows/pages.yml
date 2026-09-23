@@ -7,15 +7,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pages: write
+  contents: read
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,40 +35,21 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish dist to gh-pages
-        run: |
-          touch dist/.nojekyll
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          rm -rf pages-worktree
-          git worktree add --detach pages-worktree
-          cd pages-worktree
-          git checkout --orphan gh-pages
-          git rm -rf . || true
-          cp -R ../dist/. .
-          git add .
-          git commit -m "Deploy GitHub Pages"
-          git push --force origin gh-pages
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
 
-      - name: Build and deploy the published Pages branch
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          expected_commit=$(git -C pages-worktree rev-parse HEAD)
-          build_url=$(gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds" --jq '.url')
-          for attempt in $(seq 1 60); do
-            build=$(gh api "$build_url")
-            status=$(jq -r '.status' <<< "$build")
-            commit=$(jq -r '.commit' <<< "$build")
-            if [ "$status" = "built" ] && [ "$commit" = "$expected_commit" ]; then
-              echo "Pages deployed commit $commit"
-              exit 0
-            fi
-            if [ "$status" = "errored" ]; then
-              jq '.error' <<< "$build"
-              exit 1
-            fi
-            sleep 5
-          done
-          echo "Pages did not deploy the expected commit within five minutes."
-          exit 1
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
