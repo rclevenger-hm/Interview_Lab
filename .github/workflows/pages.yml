@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 concurrency:
   group: pages
@@ -49,3 +50,26 @@ jobs:
           git add .
           git commit -m "Deploy GitHub Pages"
           git push --force origin gh-pages
+
+      - name: Build and deploy the published Pages branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          expected_commit=$(git -C pages-worktree rev-parse HEAD)
+          build_url=$(gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds" --jq '.url')
+          for attempt in $(seq 1 60); do
+            build=$(gh api "$build_url")
+            status=$(jq -r '.status' <<< "$build")
+            commit=$(jq -r '.commit' <<< "$build")
+            if [ "$status" = "built" ] && [ "$commit" = "$expected_commit" ]; then
+              echo "Pages deployed commit $commit"
+              exit 0
+            fi
+            if [ "$status" = "errored" ]; then
+              jq '.error' <<< "$build"
+              exit 1
+            fi
+            sleep 5
+          done
+          echo "Pages did not deploy the expected commit within five minutes."
+          exit 1
