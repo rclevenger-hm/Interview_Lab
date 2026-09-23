@@ -1,15 +1,5 @@
 import assert from "node:assert/strict";
-import fs from "node:fs";
-import vm from "node:vm";
-import ts from "typescript";
-
-const source = fs.readFileSync("src/interviewEngine.ts", "utf8");
-const compiled = ts.transpileModule(source, {
-  compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
-});
-const sandbox = { exports: {} };
-vm.runInNewContext(compiled.outputText, sandbox, { filename: "src/interviewEngine.ts" });
-const engine = sandbox.exports;
+import * as engine from "../src/interviewEngine.ts";
 
 const rubric = [
   "Explains a clear algorithm before diving into syntax",

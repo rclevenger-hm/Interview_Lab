@@ -9,6 +9,16 @@ updates:
       timezone: "America/Chicago"
     open-pull-requests-limit: 5
     groups:
+      vite-toolchain:
+        patterns:
+          - "vite"
+          - "@vitejs/plugin-react"
+      react-runtime:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
       routine-updates:
         patterns:
           - "*"

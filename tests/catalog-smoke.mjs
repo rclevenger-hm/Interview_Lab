@@ -1,20 +1,8 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import vm from "node:vm";
-import ts from "typescript";
+import { disciplines } from "../src/data.ts";
+import { extraChallengesByDiscipline } from "../src/extraChallenges.ts";
 
-function evaluate(file) {
-  const source = fs.readFileSync(file, "utf8");
-  const compiled = ts.transpileModule(source, {
-    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
-  });
-  const sandbox = { exports: {} };
-  vm.runInNewContext(compiled.outputText, sandbox, { filename: file });
-  return sandbox.exports;
-}
-
-const { disciplines } = evaluate("src/data.ts");
-const { extraChallengesByDiscipline } = evaluate("src/extraChallenges.ts");
 const appSource = fs.readFileSync("src/EnhancedApp.tsx", "utf8");
 
 assert.equal(disciplines.length, 7, "the catalog should keep all seven major disciplines");

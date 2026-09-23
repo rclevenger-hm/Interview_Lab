@@ -59,7 +59,7 @@ Signal Interview Lab is intended to prepare the whole candidate. Coding intervie
 
 ### Requirements
 
-- Node.js 18+ (CI uses Node 20)
+- Node.js 24+ (CI uses Node 24)
 - npm
 
 ### Install and run

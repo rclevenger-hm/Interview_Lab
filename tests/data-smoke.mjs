@@ -1,22 +1,9 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import vm from "node:vm";
-import ts from "typescript";
+import { disciplines } from "../src/data.ts";
 
-const dataSource = fs.readFileSync("src/data.ts", "utf8");
 const appSource = fs.readFileSync("src/App.tsx", "utf8");
 
-const compiled = ts.transpileModule(dataSource, {
-  compilerOptions: {
-    module: ts.ModuleKind.CommonJS,
-    target: ts.ScriptTarget.ES2020,
-  },
-});
-
-const sandbox = { exports: {} };
-vm.runInNewContext(compiled.outputText, sandbox, { filename: "src/data.ts" });
-
-const { disciplines } = sandbox.exports;
 assert.ok(Array.isArray(disciplines), "disciplines should export an array");
 assert.ok(disciplines.length >= 7, "expected the major interview disciplines");
 
