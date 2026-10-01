@@ -59,6 +59,13 @@ assert.equal(engine.sanitizeAttempts([{ nope: true }]).length, 0, "invalid saved
 assert.equal(engine.sanitizeAttempts(attempts).length, attempts.length, "valid attempts should survive sanitization");
 assert.equal(engine.sanitizeAttempts([{ ...attempts[0], helpLevel: 3 }]).length, 1, "maximum supported help level should remain valid");
 
+const duplicateAttempts = engine.sanitizeAttempts([
+  attempts[0],
+  { ...attempts[0], score: 91, createdAt: "2026-09-06T12:00:00Z" },
+]);
+assert.equal(duplicateAttempts.length, 1, "duplicate persisted attempt ids should not double-count progress");
+assert.equal(duplicateAttempts[0].score, 91, "newest duplicate attempt should win during recovery");
+
 const corruptAttempts = [
   { ...attempts[0], id: "" },
   { ...attempts[0], wordCount: -1 },
