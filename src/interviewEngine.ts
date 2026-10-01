@@ -299,7 +299,8 @@ export function practiceStreak(attempts: AttemptRecord[], now = new Date()): num
 
 export function sanitizeAttempts(value: unknown): AttemptRecord[] {
   if (!Array.isArray(value)) return [];
-  return value.filter((item): item is AttemptRecord => {
+
+  const valid = value.filter((item): item is AttemptRecord => {
     if (!item || typeof item !== "object") return false;
     const candidate = item as Partial<AttemptRecord>;
     return Boolean(
@@ -315,4 +316,11 @@ export function sanitizeAttempts(value: unknown): AttemptRecord[] {
       !Number.isNaN(Date.parse(candidate.createdAt))
     );
   });
+
+  const byId = new Map<string, AttemptRecord>();
+  for (const attempt of valid) {
+    const existing = byId.get(attempt.id);
+    if (!existing || attempt.createdAt > existing.createdAt) byId.set(attempt.id, attempt);
+  }
+  return [...byId.values()];
 }
