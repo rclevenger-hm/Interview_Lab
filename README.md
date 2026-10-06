@@ -51,7 +51,7 @@ Signal Interview Lab is intended to prepare the whole candidate. Coding intervie
 │  ├─ catalog-smoke.mjs     # Catalog depth, difficulty, IDs, company mappings, mock coverage
 │  └─ interview-engine.mjs  # Scoring, mastery, recommendations, progress, streak behavior
 └─ .github/workflows/
-   ├─ ci.yml                # Pull-request test + build gate
+   ├─ ci.yml                # Pull-request dependency audit + test + build gate
    └─ pages.yml             # GitHub Pages deployment
 ```
 
@@ -76,6 +76,17 @@ npm test
 ```
 
 The test command validates the original catalog, expanded catalog, company mappings, mock prompt coverage, scoring behavior, mastery behavior, adaptive recommendations, persisted attempt validation, and practice streaks.
+
+### Dependency security
+
+```bash
+npm ci
+npm run audit:dependencies
+```
+
+The audit checks the locked production and development dependencies, including the build toolchain. High and critical advisories fail the check; lower-severity findings remain visible for review. The same command runs in pull-request CI and before the Pages build, so an unresolved high/critical finding or an unavailable audit service blocks publication.
+
+For a failure, review the advisory and dependency path, prefer a targeted upgrade or removal, and rerun the audit, tests, and build. Do not bypass the gate with `--omit=dev`, `continue-on-error`, or a blanket `npm audit fix --force`. If an upstream fix is unavailable, document the advisory, affected path, exposure, mitigation, and review/removal date in the tracking issue before proposing any narrowly scoped policy change.
 
 ### Production build
 
