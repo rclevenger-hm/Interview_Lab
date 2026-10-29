@@ -314,5 +314,9 @@ export function sanitizeAttempts(value: unknown): AttemptRecord[] {
       typeof candidate.createdAt === "string" &&
       !Number.isNaN(Date.parse(candidate.createdAt))
     );
-  });
+  }).map((attempt) => ({
+    ...attempt,
+    // Preserve earned progress when optional imported/legacy metadata is malformed.
+    company: typeof attempt.company === "string" ? attempt.company : null,
+  }));
 }

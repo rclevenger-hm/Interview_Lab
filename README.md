@@ -49,7 +49,8 @@ Signal Interview Lab is intended to prepare the whole candidate. Coding intervie
 ├─ tests/
 │  ├─ data-smoke.mjs        # Original data integrity checks
 │  ├─ catalog-smoke.mjs     # Catalog depth, difficulty, IDs, company mappings, mock coverage
-│  └─ interview-engine.mjs  # Scoring, mastery, recommendations, progress, streak behavior
+│  ├─ interview-engine.mjs  # Scoring, mastery, recommendations, progress, streak behavior
+│  └─ persistence.mjs       # Legacy/corrupt metadata compatibility and saved-history rendering
 └─ .github/workflows/
    ├─ ci.yml                # Pull-request dependency audit + test + build gate
    └─ pages.yml             # GitHub Pages deployment
@@ -75,7 +76,7 @@ npm run dev
 npm test
 ```
 
-The test command validates the original catalog, expanded catalog, company mappings, mock prompt coverage, scoring behavior, mastery behavior, adaptive recommendations, persisted attempt validation, and practice streaks.
+The test command validates the original catalog, expanded catalog, company mappings, mock prompt coverage, scoring behavior, mastery behavior, adaptive recommendations, persisted attempt validation, saved-history rendering, and practice streaks. Imported or locally saved attempts with malformed optional company metadata retain their valid scores and history, using the role-wide label; invalid required attempt fields are still rejected.
 
 ### Dependency security
 
